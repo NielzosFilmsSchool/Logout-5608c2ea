@@ -41,14 +41,14 @@ try {
         $stmt = "";
         if($type == "film") {
             $stmt = $pdo->prepare(
-                "INSERT INTO media (type, title, duur, datum_uitkomst, land_uitkomst, description)"
-                ."VALUES ('film', '".$_POST["title"]."', ".$_POST["duur"].", '".$_POST["uitkomst"]."', '".$_POST["land"]."', '".addslashes($_POST["desc"])."')"
+                "INSERT INTO media (type, title, duur, datum_uitkomst, land_uitkomst, description)
+                VALUES ('film', '".$_POST["title"]."', ".$_POST["duur"].", '".$_POST["uitkomst"]."', '".$_POST["land"]."', '".addslashes($_POST["desc"])."')"
             );
         } else if($type == "serie") {
             $stmt = $pdo->prepare(
-                "INSERT INTO media (type, title, rating, has_won_awards, seasons, land_uitkomst, taal, description)"
-                ."VALUES ('serie', '".$_POST["title"]."', ".$_POST["rating"].", ".$_POST["awards"].", ".$_POST["seasons"].", '".$_POST["country"]."',"
-                ."'".$_POST["lan"]."', '".addslashes($_POST["desc"])."')"
+                "INSERT INTO media (type, title, rating, has_won_awards, seasons, land_uitkomst, taal, description)
+                VALUES ('serie', '".$_POST["title"]."', ".$_POST["rating"].", ".$_POST["awards"].", ".$_POST["seasons"].", '".$_POST["country"]."',
+                '".$_POST["lan"]."', '".addslashes($_POST["desc"])."')"
             );
         }
         $stmt->execute();
