@@ -31,55 +31,122 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
     $title = $_GET["title"];
     if(isset($_POST["submit"])) {
-        $stmt = $pdo->prepare("
-            UPDATE media
+        $stmt = $pdo->prepare(
+            "UPDATE media
             SET
-                title = '".$_POST["title"]."',
-                rating = ".$_POST["rating"].",
-                has_won_awards = ".$_POST["awards"].",
-                seasons = ".$_POST["seasons"].",
-                land_uitkomst = '".$_POST["country"]."',
-                taal = '".$_POST["lan"]."',
-                description = '".addslashes($_POST["desc"])."'
+                title = '".$_POST['title']."',
+                rating = ".$_POST['rating'].",
+                has_won_awards = ".$_POST['awards'].",
+                seasons = ".$_POST['seasons'].",
+                land_uitkomst = '".$_POST['country']."',
+                taal = '".$_POST['lan']."',
+                description = '".addslashes($_POST['desc'])."'
             WHERE
-                title = '".$_GET["title"]."';
-
-            ");
+                title = '".$_GET['title']."';"
+        );
         $stmt->execute();
         $title = $_POST["title"];
     }
-    echo "<a href='series.php?title=".$title."'>Terug</a>";
-    $stmt = $pdo->query('SELECT * FROM media WHERE title LIKE "'.$title.'"');
-    $form = "<form id='series_form' action='series_edit.php?title=".$title."' method='post'><table>";
+    ?>
+    <a href='series.php?title=<?= $title?>'>Terug</a>
+    <form id='series_form' action='series_edit.php?title=<?= $title?>' method='post'>
+        <table>
+    <?php
+    $stmt = $pdo->query("SELECT * FROM media WHERE title LIKE '".$title."'");
     while ($row = $stmt->fetch())
     {
-        echo "<h1>".$row["title"]." - ".$row["rating"]."</h1>";
-
-        $form .= "<tr><td><b>Title</b></td><td><input type='text' name='title' value='".$row["title"]."'></td><tr>";
-        $form .= "<tr><td><b>Rating</b></td><td><input type='number' name='rating' step='0.1' min='0' max='5' value='".$row["rating"]."'></td><tr>";
-        $form .= "<tr><td><b>Awards</b></td><td><select name='awards'>";
+        ?>
+        <h1><?= $row["title"]?> - <?= $row["rating"]?></h1>
+        <tr>
+            <td>
+                <b>Title</b>
+            </td>
+            <td>
+                <input type='text' name='title' value='<?= $row["title"]?>' />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Rating</b>
+            </td>
+            <td>
+                <input type='number' name='rating' step='0.1' min='0' max='5' value='<?= $row["rating"]?>'>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Awards</b>
+            </td>
+            <td>
+                <select name='awards'>
+        <?php
         if($row["has_won_awards"] == 1) {
-            $form .= "<option value='1' selected>Ja</option>";
+            ?>
+            <option value='1' selected>Ja</option>
+            <?php
         } else {
-            $form .= "<option value='1'>Ja</option>";
+            ?>
+            <option value='1'>Ja</option>
+            <?php
         }
         if($row["has_won_awards"] == 0) {
-            $form .= "<option value='0'selected>Nee</option>";
+            ?>
+            <option value='0'selected>Nee</option>
+            <?php
         } else {
-            $form .= "<option value='0'>Nee</option>";
+            ?>
+            <option value='0'>Nee</option>
+            <?php
         }
-        $form .= "</select></td><tr>";
-
-        $form .= "<tr><td><b>Seasons</b></td><td><input type='number' name='seasons' value='".$row["seasons"]."'></td><tr>";
-        $form .= "<tr><td><b>Country</b></td><td><input type='text' name='country' value='".$row["land_uitkomst"]."'></td><tr>";
-        $form .= "<tr><td><b>Language</b></td><td><input type='text' name='lan' value='".$row["taal"]."'></td><tr>";
-        $form .= "<tr><td><b>Description</b></td><td><textarea name='desc' form='series_form'>".$row["description"]."</textarea></td><tr>";
-        
-        $form .= "<tr><td></td><td><input type='submit' name='submit'></input></td><tr>";
-        
+        ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Seasons</b>
+            </td>
+            <td>
+                <input type='number' name='seasons' value='<?= $row["seasons"]?>' />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Country</b>
+            </td>
+            <td>
+                <input type='text' name='country' value='<?= $row["land_uitkomst"]?>' />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Language</b>
+            </td>
+            <td>
+                <input type='text' name='lan' value='<?= $row["taal"]?>' />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Description</b>
+            </td>
+            <td>
+                <textarea name='desc' form='series_form'><?= $row["description"]?></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type='submit' name='submit'></input>
+            </td>
+        </tr>
+        <?php
     }
-    $form .= "</table></form>";
-    echo $form;
+    ?>
+        </table>
+    </form>
+    <?php
     
 } catch (\PDOException $e) {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());

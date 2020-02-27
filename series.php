@@ -1,4 +1,7 @@
 <a class="logout-btn" href='logout.php'>Logout</a>
+<a href='index.php'>Terug</a>
+<a style='margin-left:20px;' href='series_edit.php?title=<?= $_GET['title']?>'>Bewerk</a>
+
 <style>
     .logout-btn {
         position: absolute;
@@ -14,9 +17,6 @@
 if(!isset($_COOKIE["loggedInUser"])) {
     header("Location: login.php");
 }
-
-echo "<a href='index.php'>Terug</a>";
-echo "<a style='margin-left:20px;' href='series_edit.php?title=".$_GET['title']."'>Bewerk</a>";
 
 $host = '127.0.0.1';
 $db   = 'netland';
@@ -35,16 +35,24 @@ try {
     $stmt = $pdo->query('SELECT * FROM media WHERE title LIKE "'.$_GET["title"].'"');
     while ($row = $stmt->fetch())
     {
-        echo "<h1>".$row["title"]." - ".$row["rating"]."</h1>";
-        if($row["has_won_awards"] == 1)
-            echo "<b>Awards</b> Ja<br>";
-        else
-            echo "<b>Awards</b> Nee<br>";
-        echo "<b>Seasons</b> ".$row["seasons"]."<br>";
-        echo "<b>Country</b> ".$row["land_uitkomst"]."<br>";
-        echo "<b>Language</b> ".$row["taal"]."<br>";
-        echo "<p>".$row["description"]."</p>";
-        
+        ?>
+        <h1><?=$row["title"]?> - <?= $row["rating"]?></h1>
+        <?php
+        if($row["has_won_awards"] == 1) {
+            ?>
+            <b>Awards</b> Ja<br>
+            <?php
+        } else {
+            ?>
+            <b>Awards</b> Nee<br>
+            <?php
+        }
+        ?>
+        <b>Seasons</b> <?= $row["seasons"]?><br>
+        <b>Country</b> <?= $row["land_uitkomst"]?><br>
+        <b>Language</b> <?= $row["taal"]?><br>
+        <p><?= $row["description"]?></p>
+        <?php   
     }
     
 } catch (\PDOException $e) {

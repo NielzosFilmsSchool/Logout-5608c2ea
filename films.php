@@ -1,4 +1,6 @@
 <a class="logout-btn" href='logout.php'>Logout</a>
+<a href='index.php'>Terug</a>
+<a style='margin-left:20px;' href='films_edit.php?title=<?= $_GET['title']?>'>Bewerk</a>
 <style>
     .logout-btn {
         position: absolute;
@@ -14,9 +16,6 @@
 if(!isset($_COOKIE["loggedInUser"])) {
     header("Location: login.php");
 }
-
-echo "<a href='index.php'>Terug</a>";
-echo "<a style='margin-left:20px;' href='films_edit.php?title=".$_GET['title']."'>Bewerk</a>";
 
 $host = '127.0.0.1';
 $db   = 'netland';
@@ -34,10 +33,12 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
     $stmt = $pdo->query('SELECT * FROM media WHERE title LIKE "'.$_GET["title"].'"');
     while($row = $stmt->fetch()) {
-        echo "<h1>".$row["title"]." - ".$row["duur"]." minuten</h1>";
-        echo "<b>Datum van uitkomst</b> ".$row["datum_uitkomst"]."<br>";
-        echo "<b>Land van uitkomst</b> ".$row["land_uitkomst"]."<br>";
-        echo "<p>".$row["description"]."</p>";  
+        ?>  
+        <h1><?= $row["title"]?> - <?= $row["duur"]?> minuten</h1>
+        <b>Datum van uitkomst</b> <?= $row["datum_uitkomst"]?><br>
+        <b>Land van uitkomst</b> <?= $row["land_uitkomst"]?><br>
+        <p><?= $row["description"]?></p>
+        <?php
     }
      
 } catch(\PDOException $e) {
