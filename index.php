@@ -50,10 +50,10 @@ try {
         <table>
             <tr>
                 <th>
-                    <a href='?sort=title&sortFilms=<?= $_GET["sortFilms"]?>' >Titel</a>
+                    <a href='?sort=title&sortFilms=<?php echo $_GET["sortFilms"]; ?>' >Titel</a>
                 </th>
                 <th>
-                    <a href='?sort=rating&sortFilms=<?= $_GET["sortFilms"]?>'>Rating</a>
+                    <a href='?sort=rating&sortFilms=<?php echo $_GET["sortFilms"]; ?>'>Rating</a>
                 </th>
                 <th>
                     Details
@@ -82,13 +82,13 @@ try {
             ?>
             <tr>
                 <td>
-                    <?= $row['title']?>
+                    <?php echo $row['title']; ?>
                 </td>
                 <td>
-                    <?= $row['rating']?>
+                    <?php echo $row['rating']; ?>
                 </td>
                 <td>
-                    <a href='series.php?title=<?= $row['title']?>'>Meer Details</a>
+                    <a href='series.php?title=<?php echo $row['title']; ?>'>Meer Details</a>
                 </td>
             </tr>
             <?php
@@ -119,10 +119,10 @@ try {
         <table>
             <tr>
                 <th>
-                    <a href='?sort=<?= $_GET["sort"]?>&sortFilms=title' >Titel</a>
+                    <a href='?sort=<?php echo $_GET["sort"]; ?>&sortFilms=title' >Titel</a>
                 </th>
                 <th>
-                    <a href='?sort=<?= $_GET["sort"]?>&sortFilms=duur' >Duur</a>
+                    <a href='?sort=<?php echo $_GET["sort"]; ?>&sortFilms=duur' >Duur</a>
                 </th>
                 <th>
                     Details
@@ -151,13 +151,13 @@ try {
             ?>
             <tr>
                 <td>
-                    <?= $row['title']?>
+                    <?php echo $row['title']; ?>
                 </td>
                 <td>
-                    <?= $row['duur']?>
+                    <?php echo $row['duur']; ?>
                 </td>
                 <td>
-                    <a href='films.php?title=<?= $row['title']?>'>Meer Details</a>
+                    <a href='films.php?title=<?php echo $row['title']; ?>'>Meer Details</a>
                 </td>
             </tr>
             <?php

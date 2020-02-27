@@ -47,19 +47,19 @@ try {
         $title = $_POST["title"];
     }
     ?>
-    <a href='films.php?title=<?= $title?>'>Terug</a>
-    <form id='films_form' action='films_edit.php?title=<?= $title?>' method='post'><table>
+    <a href='films.php?title=<?php echo $title;?>'>Terug</a>
+    <form id='films_form' action='films_edit.php?title=<?php echo $title;?>' method='post'><table>
     <?php
     $stmt = $pdo->query('SELECT * FROM media WHERE title LIKE "'.$title.'"');
     while($row = $stmt->fetch()) {
         ?>
-        <h1><?= $row["title"]?> - <?= $row["duur"]?></h1>
+        <h1><?php echo $row["title"];?> - <?php echo $row["duur"];?></h1>
         <tr>
             <td>
                 <b>Title</b>
             </td>
             <td>
-                <input type='text' name='title' value='<?= $row["title"]?>' />
+                <input type='text' name='title' value='<?php echo $row["title"];?>' />
             </td>
         </tr>
         <tr>
@@ -67,7 +67,7 @@ try {
                 <b>Duur</b>
             </td>
             <td>
-                <input type='number' name='duur' value='<?= $row["duur"]?>' />
+                <input type='number' name='duur' value='<?php echo $row["duur"];?>' />
             </td>
         </tr>
         <tr>
@@ -75,7 +75,7 @@ try {
                 <b>Datum van uitkoms</b>
             </td>
             <td>
-                <input type='date' name='uitkomst' value='<?= $row["datum_uitkomst"]?>' />
+                <input type='date' name='uitkomst' value='<?php echo $row["datum_uitkomst"];?>' />
             </td>
         </tr>
         <tr>
@@ -83,7 +83,7 @@ try {
                 <b>Land van uitkoms</b>
             </td>
             <td>
-                <input type='text' name='land' value='<?= $row["land_uitkomst"]?>'>
+                <input type='text' name='land' value='<?php echo $row["land_uitkomst"];?>'>
             </td>
         </tr>
         <tr>
@@ -91,7 +91,7 @@ try {
                 <b>Omschrijving</b>
             </td>
             <td>
-                <textarea name='desc' form='films_form'><?= $row["description"]?></textarea>
+                <textarea name='desc' form='films_form'><?php echo $row["description"];?></textarea>
             </td>
         </tr>
         <tr>

@@ -1,6 +1,6 @@
 <a class="logout-btn" href='logout.php'>Logout</a>
 <a href='index.php'>Terug</a>
-<a style='margin-left:20px;' href='series_edit.php?title=<?= $_GET['title']?>'>Bewerk</a>
+<a style='margin-left:20px;' href='series_edit.php?title=<?php echo $_GET['title']; ?>'>Bewerk</a>
 
 <style>
     .logout-btn {
@@ -36,7 +36,7 @@ try {
     while ($row = $stmt->fetch())
     {
         ?>
-        <h1><?=$row["title"]?> - <?= $row["rating"]?></h1>
+        <h1><?php echo $row["title"]; ?> - <?php echo $row["rating"]; ?></h1>
         <?php
         if($row["has_won_awards"] == 1) {
             ?>
@@ -48,11 +48,11 @@ try {
             <?php
         }
         ?>
-        <b>Seasons</b> <?= $row["seasons"]?><br>
-        <b>Country</b> <?= $row["land_uitkomst"]?><br>
-        <b>Language</b> <?= $row["taal"]?><br>
-        <p><?= $row["description"]?></p>
-        <?php   
+        <b>Seasons</b> <?php echo $row["seasons"]; ?><br>
+        <b>Country</b> <?php echo $row["land_uitkomst"]; ?><br>
+        <b>Language</b> <?php echo $row["taal"]; ?><br>
+        <p><?php echo $row["description"]; ?></p>
+        <?php
     }
     
 } catch (\PDOException $e) {

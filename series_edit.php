@@ -48,21 +48,21 @@ try {
         $title = $_POST["title"];
     }
     ?>
-    <a href='series.php?title=<?= $title?>'>Terug</a>
-    <form id='series_form' action='series_edit.php?title=<?= $title?>' method='post'>
+    <a href='series.php?title=<?php echo $title; ?>'>Terug</a>
+    <form id='series_form' action='series_edit.php?title=<?php echo $title; ?>' method='post'>
         <table>
     <?php
     $stmt = $pdo->query("SELECT * FROM media WHERE title LIKE '".$title."'");
     while ($row = $stmt->fetch())
     {
         ?>
-        <h1><?= $row["title"]?> - <?= $row["rating"]?></h1>
+        <h1><?php echo $row["title"]; ?> - <?php echo $row["rating"]; ?></h1>
         <tr>
             <td>
                 <b>Title</b>
             </td>
             <td>
-                <input type='text' name='title' value='<?= $row["title"]?>' />
+                <input type='text' name='title' value='<?php echo $row["title"]; ?>' />
             </td>
         </tr>
         <tr>
@@ -70,7 +70,7 @@ try {
                 <b>Rating</b>
             </td>
             <td>
-                <input type='number' name='rating' step='0.1' min='0' max='5' value='<?= $row["rating"]?>'>
+                <input type='number' name='rating' step='0.1' min='0' max='5' value='<?php echo $row["rating"]; ?>'>
             </td>
         </tr>
         <tr>
@@ -107,7 +107,7 @@ try {
                 <b>Seasons</b>
             </td>
             <td>
-                <input type='number' name='seasons' value='<?= $row["seasons"]?>' />
+                <input type='number' name='seasons' value='<?php echo $row["seasons"]; ?>' />
             </td>
         </tr>
         <tr>
@@ -115,7 +115,7 @@ try {
                 <b>Country</b>
             </td>
             <td>
-                <input type='text' name='country' value='<?= $row["land_uitkomst"]?>' />
+                <input type='text' name='country' value='<?php echo $row["land_uitkomst"]; ?>' />
             </td>
         </tr>
         <tr>
@@ -123,7 +123,7 @@ try {
                 <b>Language</b>
             </td>
             <td>
-                <input type='text' name='lan' value='<?= $row["taal"]?>' />
+                <input type='text' name='lan' value='<?php echo $row["taal"]; ?>' />
             </td>
         </tr>
         <tr>
@@ -131,7 +131,7 @@ try {
                 <b>Description</b>
             </td>
             <td>
-                <textarea name='desc' form='series_form'><?= $row["description"]?></textarea>
+                <textarea name='desc' form='series_form'><?php echo $row["description"]; ?></textarea>
             </td>
         </tr>
         <tr>

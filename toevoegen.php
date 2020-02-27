@@ -33,7 +33,7 @@ try {
     $type = $_GET["type"];
 
     ?>
-    <form id='toevoegen_form' action='toevoegen.php?type=<?= $type?>' method='post'>
+    <form id='toevoegen_form' action='toevoegen.php?type=<?php echo $type;?>' method='post'>
         <table>
     <?php
 

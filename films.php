@@ -1,6 +1,6 @@
 <a class="logout-btn" href='logout.php'>Logout</a>
 <a href='index.php'>Terug</a>
-<a style='margin-left:20px;' href='films_edit.php?title=<?= $_GET['title']?>'>Bewerk</a>
+<a style='margin-left:20px;' href='films_edit.php?title=<?php echo $_GET['title']; ?>'>Bewerk</a>
 <style>
     .logout-btn {
         position: absolute;
@@ -34,10 +34,10 @@ try {
     $stmt = $pdo->query('SELECT * FROM media WHERE title LIKE "'.$_GET["title"].'"');
     while($row = $stmt->fetch()) {
         ?>  
-        <h1><?= $row["title"]?> - <?= $row["duur"]?> minuten</h1>
-        <b>Datum van uitkomst</b> <?= $row["datum_uitkomst"]?><br>
-        <b>Land van uitkomst</b> <?= $row["land_uitkomst"]?><br>
-        <p><?= $row["description"]?></p>
+        <h1><?php echo $row["title"]; ?> - <?php echo $row["duur"]; ?> minuten</h1>
+        <b>Datum van uitkomst</b> <?php echo $row["datum_uitkomst"]; ?><br>
+        <b>Land van uitkomst</b> <?php echo $row["land_uitkomst"]; ?><br>
+        <p><?php echo $row["description"]; ?></p>
         <?php
     }
      
